@@ -24,4 +24,11 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.sxshi.retrofit", appContext.getPackageName());
     }
+
+    @Test
+    public void testLogin(){
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+
+
+    }
 }

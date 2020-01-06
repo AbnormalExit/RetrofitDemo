@@ -2,6 +2,7 @@ package com.sxshi.retrofit.base;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -77,14 +78,17 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
 
     @Override
     public void onUnknownError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onTimeout() {
+        Toast.makeText(this, "time out", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNetworkError() {
+        Toast.makeText(this, "network error", Toast.LENGTH_SHORT).show();
     }
 
     @Override
