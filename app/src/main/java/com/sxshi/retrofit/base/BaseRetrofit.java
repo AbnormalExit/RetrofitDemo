@@ -34,7 +34,7 @@ public class BaseRetrofit {
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS);//超时设置
     }
 
-    protected <T> T getService(Class<T> clzz) {
+    <T> T getService(Class<T> clzz) {
         return new Retrofit.Builder()
                 .baseUrl(URLContainer.BASE_URL)
                 .client(builder.build())

@@ -1,7 +1,5 @@
 package com.sxshi.retrofit.base;
 
-import com.sxshi.retrofit.base.IBaseView;
-
 import org.json.JSONObject;
 
 import java.io.IOException;

@@ -10,14 +10,13 @@ import io.reactivex.disposables.Disposable;
 public class BaseViewModel extends ViewModel {
 
     //将所有正在处理的Subscription都添加到CompositeSubscription中。统一退出的时候注销观察
-    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+    public CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     protected DataRepository repository;
 
 
-    protected MutableLiveData<Throwable> mutableErrorLiveData = new MutableLiveData<>();
+    public MutableLiveData<Throwable> mutableErrorLiveData = new MutableLiveData<>();
 
-    private LiveData<Throwable> errorLiveData;
 
     public LiveData<Throwable> getErrorLiveData() {
         return mutableErrorLiveData;

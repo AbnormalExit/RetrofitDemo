@@ -19,7 +19,7 @@ public class MainViewModel extends BaseViewModel {
     }
 
     public void Login(HashMap<String, String> param) {
-        repository.login(param, new CommDisposableObserver<BaseResponse<String>>(mutableErrorLiveData) {
+        repository.login(param, new CommDisposableObserver<BaseResponse<String>>(this) {
             @Override
             protected void onSuccess(BaseResponse<String> stringBaseResponse) {
                 mutableLiveData.setValue(stringBaseResponse.getData());

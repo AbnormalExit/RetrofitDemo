@@ -3,6 +3,9 @@ package com.sxshi.retrofit.base;
 import androidx.lifecycle.MutableLiveData;
 
 import com.sxshi.retrofit.bean.BaseResponse;
+import com.sxshi.retrofit.model.BaseViewModel;
+
+import java.lang.ref.WeakReference;
 
 import io.reactivex.observers.DisposableObserver;
 
@@ -19,8 +22,10 @@ public abstract class CommDisposableObserver<T extends BaseResponse> extends Dis
      */
     private MutableLiveData<Throwable> errorLiveData;
 
-    public CommDisposableObserver(MutableLiveData<Throwable> errorLiveData) {
-        this.errorLiveData = errorLiveData;
+    public CommDisposableObserver(BaseViewModel model) {
+        BaseViewModel baseModel = new WeakReference<BaseViewModel>(model).get();
+        this.errorLiveData = baseModel.mutableErrorLiveData;
+        baseModel.addDisposable(this);
     }
 
     @Override
