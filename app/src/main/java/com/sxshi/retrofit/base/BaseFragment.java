@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.sxshi.retrofit.model.BaseViewModel;
 
@@ -43,17 +42,10 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (providerVM() != null)
-            model = ViewModelProviders.of(this).get(providerVM());
         handleException = new HandleException(this);
         if (model != null) {
             //统一异常处理
-            model.getErrorLiveData().observe(this, new Observer<Throwable>() {
-                @Override
-                public void onChanged(Throwable throwable) {
-                    handleException.handlerExcep(throwable);
-                }
-            });
+            model.getErrorLiveData().observe(this, throwable -> handleException.handlerExcep(throwable));
         }
         initData();
     }

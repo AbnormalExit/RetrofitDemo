@@ -2,8 +2,6 @@ package com.sxshi.retrofit.ui.main;
 
 import android.view.View;
 
-import androidx.lifecycle.Observer;
-
 import com.sxshi.retrofit.R;
 import com.sxshi.retrofit.base.BaseFragment;
 
@@ -16,23 +14,17 @@ public class MainFragment extends BaseFragment<MainViewModel> {
 
     @Override
     protected void initData() {
-        model.getUserInfoLiveData().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                // TODO: 2019-12-12  update UI
+        model.getUserInfoLiveData().observe(this, s -> {
+            // TODO: 2019-12-12  update UI
 
-            }
         });
     }
 
     @Override
     protected void initView(View view) {
-        view.findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HashMap<String, String> param = new HashMap<>();
-                model.Login(param);
-            }
+        view.findViewById(R.id.start).setOnClickListener(v -> {
+            HashMap<String, String> param = new HashMap<>();
+            model.Login(param);
         });
     }
 

@@ -6,15 +6,15 @@ import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.handpay.mvvm.BaseVMActivity;
 import com.sxshi.retrofit.model.BaseViewModel;
 import com.sxshi.retrofit.utils.ConnectivityUtils;
 import com.sxshi.retrofit.utils.DialogUtils;
 
-public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<T extends BaseViewModel> extends BaseVMActivity<T> implements IBaseView {
     protected Dialog progressDialog;
 
     private HandleException handleException;
@@ -30,9 +30,6 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         super.onCreate(savedInstanceState);
         setContentView(getContentLayoutResId());
         handleException = new HandleException(this);
-        if (providerVM() != null) {
-            model = ViewModelProviders.of(this).get(providerVM());
-        }
         if (model != null) {
             //统一异常处理
             model.getErrorLiveData().observe(this, new Observer<Throwable>() {
