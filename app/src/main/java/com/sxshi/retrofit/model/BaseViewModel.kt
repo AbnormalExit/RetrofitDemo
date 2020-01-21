@@ -9,8 +9,10 @@ import io.reactivex.disposables.Disposable
 open class BaseViewModel : BaseVM() {
     //将所有正在处理的Subscription都添加到CompositeSubscription中。统一退出的时候注销观察
     private var mCompositeDisposable: CompositeDisposable? = CompositeDisposable()
-    @JvmField
-    protected var repository: DataRepository
+
+    open val repository by lazy {
+        DataRepository()
+    }
     var mutableErrorLiveData = MutableLiveData<Throwable>()
     val errorLiveData: LiveData<Throwable>
         get() = mutableErrorLiveData
@@ -45,9 +47,5 @@ open class BaseViewModel : BaseVM() {
     override fun onCleared() {
         super.onCleared()
         unDisposable()
-    }
-
-    init {
-        repository = DataRepository()
     }
 }

@@ -17,15 +17,15 @@ class MainFragment : BaseFragment<MainViewModel>() {
             model?.login(param)
         }
     }
+
     override fun providerVM(): Class<MainViewModel>? {
         return MainViewModel::class.java
     }
 
 
-    override val contentLayoutResId: Int= R.layout.main_fragment
+    override val contentLayoutResId: Int = R.layout.main_fragment
 
     companion object {
-        @JvmStatic
         fun newInstance(): MainFragment {
             return MainFragment()
         }

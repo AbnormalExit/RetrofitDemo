@@ -16,22 +16,22 @@ abstract class CommDisposableObserver<T : BaseResponse<*>>(model: BaseViewModel)
     /**
      * 全局错误处理
      */
-    private val errorLiveData: MutableLiveData<Throwable>
+    private val weakReference: WeakReference<BaseViewModel> = WeakReference(model)
+    private val currModel: BaseViewModel?
 
     override fun onNext(t: T) { //http 200..300都会进入此方法，如果需要自定义成功状态码这需要在这里添加
         onSuccess(t)
     }
 
     override fun onError(t: Throwable) {
-        errorLiveData.value = t
+        currModel?.mutableErrorLiveData?.value = t
     }
 
     override fun onComplete() {}
     protected abstract fun onSuccess(t: T)
 
     init {
-        val baseModel = WeakReference(model).get()
-        errorLiveData = baseModel!!.mutableErrorLiveData
-        baseModel.addDisposable(this)
+        currModel = weakReference.get()
+        currModel?.addDisposable(this)
     }
 }
